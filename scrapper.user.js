@@ -25,30 +25,32 @@
     }
 
     function scrapItem(container){
-        container.childNodes.forEach(item =>
-            {
-                switch (item.nodeName) {
-                    case "#text":
-                        if (! item.nodeValue.match("(#text )?(\\n *)*")){
-                            addItem(item.nodeValue,webpageScraper.textNodes);
-                        }
-                        break;
-                    case "#comment":
-                        addItem(item.nodeValue,webpageScraper.comments);
-                    default:
-                        if (item.href != null){
-                            if (item.href == document.location.href || item.href.match(document.location.href.replace(/\./g, "\\.").replace(/^http/, "http.?")+"#.*") || item.href.match("#.*")){
+        container.childNodes.forEach(item =>{
+            switch (item.nodeName) {
+                case "#text":
+                    if (! item.nodeValue.match("(#text )?(\\n *)*")){
+                        addItem(item.nodeValue,webpageScraper.textNodes);
+                    }
+                    break;
+                case "#comment":
+                    addItem(item.nodeValue,webpageScraper.comments);
+                    break;
+                default:
+                    if (item.href != null){
+                        let regex = document.location.href.replace(/\./g, "\\.").replace(/^http/, "http.?")+"#.*";
+                        if (typeof item.href == "string"){
+                            if (item.href == document.location.href || item.href.match(regex) || item.href.match("#.*")){
                                 addItem(item.href,webpageScraper.internalUrls)
                             }else{
                                 addItem(item.href,webpageScraper.externalUrls)
                             }
-                        }
-                        if (item.childElementCount > 0){
-                            scrapItem(item);
-                        }
-                }
+                       }
+                    }
+                    if (item.childElementCount > 0){
+                        scrapItem(item);
+                    }
             }
-        );
+        });
     }
 
     function closeReport(item){
