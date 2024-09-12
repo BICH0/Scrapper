@@ -63,6 +63,9 @@
         let target = item.target;
         if (target.nodeName == "P"){
             let itemValue = target.innerText;
+            if (itemValue == "Text copied!"){
+                break;
+            }
             navigator.clipboard.writeText(itemValue);
             target.innerText = "Text copied!";
             await sleep(700);
