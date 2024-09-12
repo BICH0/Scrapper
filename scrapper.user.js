@@ -35,7 +35,6 @@
                         break;
                     case "#comment":
                         addItem(item.nodeValue,webpageScraper.comments);
-                        break;
                     default:
                         if (item.href != null){
                             if (item.href == document.location.href || item.href.match(document.location.href.replace(/\./g, "\\.").replace(/^http/, "http.?")+"#.*") || item.href.match("#.*")){
@@ -94,7 +93,7 @@
     let stats = document.createElement("div");
     stats.id = "statsContainer"+instanceID;
 
-    let customCSSText = `#${scrapButton.id}{bottom:20px;right:20px;position:fixed;z-index:9999;height:40px;background:red;padding:2px;border-radius:.5rem;}#${scrapButton.id}:hover,#${stats.id}>div>p:hover{cursor:pointer}#${stats.id}{display:inline-block;position:fixed;top:0px;right:0px;z-index:9999;background-color:#151515;padding:10px 20px;}#${stats.id}>div{min-height:20px;max-height:10rem;overflow-y:auto;max-width:40vw;}#${stats.id}>h1{margin:10px 0px 5px 0px;font-size:1.5rem;line-height:1.5rem;padding:0px;color:#d63838;}#${stats.id}>div>p{white-space: nowrap;margin-bottom:5px;max-width:39vw;font-size:1rem;color: #f78888}#${stats.id}>h2{color: #ffffff;margin-bottom: 10px;}`
+    let customCSSText = `#${scrapButton.id}{bottom:20px;right:20px;position:fixed;z-index:9999;height:40px;background:red;padding:2px;border-radius:.5rem;}#${scrapButton.id}:hover,#${stats.id}>div>p:hover,#${stats.id}>h2:hover{cursor:pointer}#${stats.id}{display:inline-block;position:fixed;top:0px;right:0px;z-index:9999;background-color:#151515;padding:10px 20px;}#${stats.id}>div{min-height:20px;max-height:10rem;overflow-y:auto;max-width:40vw;}#${stats.id}>h1{margin:10px 0px 5px 0px;font-size:1.5rem;line-height:1.5rem;padding:0px;color:#d63838;}#${stats.id}>div>p{white-space: nowrap;margin-bottom:5px;max-width:39vw;font-size:1rem;color: #f78888}#${stats.id}>h2{color: #ffffff;margin-bottom: 10px;}`
     let customCSS = document.createElement("style");
     if (customCSS.styleSheet) {
         customCSS.styleSheet.cssText = customCSSText;
